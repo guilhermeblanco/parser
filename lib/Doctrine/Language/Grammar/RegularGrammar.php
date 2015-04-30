@@ -4,6 +4,7 @@ namespace Doctrine\Language\Grammar;
 
 use Doctrine\Language\Grammar\Analyzer;
 use Doctrine\Language\Grammar\Attribute;
+use Doctrine\Language\Grammar\Rule\ImmutableRuleSet;
 
 class RegularGrammar implements Grammar
 {
@@ -19,14 +20,6 @@ class RegularGrammar implements Grammar
     }
 
     /**
-     * @return array
-     */
-    public function getTerminalRules()
-    {
-        return $this->ruleSet->getTerminalRules();
-    }
-
-    /**
      * @param string $input
      *
      * @return Attribute\Attribute
@@ -34,7 +27,7 @@ class RegularGrammar implements Grammar
     public function parse($input)
     {
         $lexicalAnalyzer = $this->getLexicalAnalyzer();
-        $tokenIterator   = $lexicalAnalyzer->analyze($this, $input);
+        $tokenIterator   = $lexicalAnalyzer->analyze($this->ruleSet->getTerminalRuleSet(), $input);
         //$attribute     = $this->syntacticAnalyzer->analyze($tokenIterator);
 
         //return $this->semanticAnalyzer->analyze($attribute);

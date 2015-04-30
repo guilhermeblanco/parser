@@ -9,26 +9,37 @@ class ImmutableRuleSet
     /** @var array */
     protected $rules;
 
-    /** @var array */
-    protected $terminalRules;
-
     /**
      * @param array $rules
      */
     public function __construct(array $rules = [])
     {
-        $this->terminalRules = [];
-        $this->rules         = [];
+        $this->rules = [];
 
         array_map(array($this, 'add'), $rules);
     }
 
     /**
+     * @return ImmutableRuleSet
+     */
+    public function getTerminalRuleSet()
+    {
+        $terminalRules = array_filter($this->rules, function (Rule $rule) { return $rule->isTerminal(); });
+
+        // Terminal rules must always be prioritized
+        uasort($terminalRules, function (Rule $firstRule, Rule $secondRule) {
+            return $firstRule->getBody()->getPriority() - $secondRule->getBody()->getPriority();
+        });
+
+        return new ImmutableRuleSet($terminalRules);
+    }
+
+    /**
      * @return array
      */
-    public function getTerminalRules()
+    public function toArray()
     {
-        return $this->terminalRules;
+        return $this->rules;
     }
 
     /**
@@ -39,10 +50,6 @@ class ImmutableRuleSet
     protected function add(Rule $rule)
     {
         $this->rules[$rule->getName()] = $rule;
-
-        if ($rule->isTerminal()) {
-            $this->terminalRules[$rule->getName()] = $rule;
-        }
 
         return $this;
     }

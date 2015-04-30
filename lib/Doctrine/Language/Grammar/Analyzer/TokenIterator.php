@@ -2,7 +2,7 @@
 
 namespace Doctrine\Language\Grammar\Analyzer;
 
-class TokenIterator implements \Iterator
+class TokenIterator implements \Iterator, \Countable
 {
     /** @var array */
     private $tokens;
@@ -55,5 +55,13 @@ class TokenIterator implements \Iterator
     public function rewind()
     {
         reset($this->tokens);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function count()
+    {
+        return count($this->tokens);
     }
 }

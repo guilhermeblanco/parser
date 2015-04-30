@@ -7,6 +7,11 @@ final class Token
     /**
      * @var string
      */
+    private $ruleName;
+
+    /**
+     * @var string
+     */
     private $value;
 
     /**
@@ -20,15 +25,25 @@ final class Token
     private $column;
 
     /**
+     * @param string  $ruleName
      * @param string  $value
      * @param integer $line
      * @param integer $column
      */
-    public function __construct($value, $line, $column)
+    public function __construct($ruleName, $value, $line, $column)
     {
-        $this->value  = $value;
-        $this->line   = $line;
-        $this->column = $column;
+        $this->ruleName = $ruleName;
+        $this->value    = $value;
+        $this->line     = $line;
+        $this->column   = $column;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRuleName()
+    {
+        return $this->ruleName;
     }
 
     /**

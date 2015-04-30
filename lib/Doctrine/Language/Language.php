@@ -9,13 +9,11 @@ abstract class Language
 
     /**
      * @param string $input
+     *
+     * @return mixed
      */
     public function parse($input)
     {
-        $attribute = $this->grammar->parse($input);
-
-        echo '<pre>';
-        var_dump($attribute);
-        echo '</pre>';
+        return $this->grammar->parse($input);
     }
 }

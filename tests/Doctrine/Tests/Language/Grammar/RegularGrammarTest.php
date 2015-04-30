@@ -15,11 +15,9 @@ class RegularGrammarTest extends DoctrineTestCase
         $ruleSet = new Rule\RuleSet();
         $grammar = new RegularGrammar($ruleSet);
 
-        $this->assertEmpty($grammar->getTerminalRules());
-
         $this->setExpectedException('Doctrine\Language\Exception\LexicalException');
 
-        $grammar->parse('This is Sparta!');
+        $grammar->parse('This is Sparta');
     }
 
     public function testIdentifierRuleSet()
@@ -35,5 +33,6 @@ class RegularGrammarTest extends DoctrineTestCase
         $result  = $grammar->parse("This is Sparta");
 
         $this->assertInstanceOf(TokenIterator::CLASS, $result);
+        $this->assertCount(3, $result);
     }
 }
