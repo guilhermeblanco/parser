@@ -1,0 +1,27 @@
+{
+    "name": "doctrine/language",
+    "type": "library",
+    "description": "Base library for a domain specific language (DSL)",
+    "keywords": ["grammar", "dsl", "lexer", "parser"],
+    "homepage": "http://www.doctrine-project.org",
+    "license": "MIT",
+    "authors": [
+        {"name": "Guilherme Blanco", "email": "guilhermeblanco@hotmail.com"}
+    ],
+    "require": {
+        "php": ">=5.5.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.6"
+    },
+    "autoload": {
+        "psr-0": {
+            "Doctrine\\Language": "lib/"
+        }
+    },
+    "autoload-dev": {
+        "psr-0": {
+            "Doctrine\\Tests": "tests/"
+        }
+    }
+}
