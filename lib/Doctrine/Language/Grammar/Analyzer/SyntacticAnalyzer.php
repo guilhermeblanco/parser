@@ -2,7 +2,19 @@
 
 namespace Doctrine\Language\Grammar\Analyzer;
 
-interface SyntacticAnalyzer
+use Doctrine\Language\Grammar\Attribute;
+use Doctrine\Language\Grammar\Rule;
+
+class SyntacticAnalyzer
 {
-    function analyze(TokenIterator $tokenIterator);
+    /**
+     * @param Rule\ImmutableRuleSet $terminalRuleSet
+     * @param TokenIterator         $tokenIterator
+     *
+     * @return Attribute\Attribute
+     */
+    public function analyze(Rule\ImmutableRuleSet $terminalRuleSet, TokenIterator $tokenIterator)
+    {
+
+    }
 }

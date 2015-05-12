@@ -26,16 +26,23 @@ class RegularGrammar implements Grammar
      */
     public function parse($input)
     {
-        $lexicalAnalyzer = $this->getLexicalAnalyzer();
-        $tokenIterator   = $lexicalAnalyzer->analyze($this->ruleSet->getTerminalRuleSet(), $input);
-        //$attribute     = $this->syntacticAnalyzer->analyze($tokenIterator);
+        $lexicalAnalyzer   = $this->getLexicalAnalyzer();
+        $syntacticAnalyzer = $this->getSyntacticAnalyzer();
+
+        $tokenIterator = $lexicalAnalyzer->analyze($this->ruleSet->getTerminalRuleSet(), $input);
+        $attribute     = $syntacticAnalyzer->analyze($this->ruleSet, $tokenIterator);
 
         //return $this->semanticAnalyzer->analyze($attribute);
-        return $tokenIterator;
+        return $attribute;
     }
 
     protected function getLexicalAnalyzer()
     {
         return new Analyzer\LexicalAnalyzer();
+    }
+
+    protected function getSyntacticAnalyzer()
+    {
+        return new Analyzer\SyntacticAnalyzer();
     }
 }

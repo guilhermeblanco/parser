@@ -65,7 +65,7 @@ class LexicalAnalyzer
         }
 
         // Special case for white space, tabs, etc. Discard element as it's not meant to be caught
-        if (preg_match('/\s+/', $match[0])) {
+        if (preg_match('/^\s+$/', $match[0])) {
             return null;
         }
 
